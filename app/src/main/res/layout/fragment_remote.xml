@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginLeft="@dimen/margin_text"
+        android:layout_marginRight="@dimen/margin_text"
+
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="pilih nama tanaman"
+            android:textSize="@dimen/fontsize_item"
+            />
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinner"
+            android:textSize="@dimen/fontsize_item"
+
+            />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mode Kontrol"
+                android:layout_centerVertical="true"
+                />
+
+
+            <ToggleButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnMode"
+                android:layout_alignParentEnd="true"
+                />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/greysoft"
+            android:layout_marginTop="@dimen/margin_text_more"
+            />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_text"
+            >
+            <ImageView
+                android:layout_width="@dimen/profile_icon_size"
+                android:layout_height="@dimen/profile_icon_size"
+                android:src="@drawable/ic_watering"
+                android:layout_centerVertical="true"
+                android:id="@+id/watering"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Semprot"
+                android:layout_toRightOf="@+id/watering"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/margin_text"
+                />
+
+            <ToggleButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:id="@+id/btnSemprot"
+
+                />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_text"
+            >
+            <ImageView
+                android:layout_width="@dimen/profile_icon_size"
+                android:layout_height="@dimen/profile_icon_size"
+                android:src="@drawable/ic_lighting"
+                android:id="@+id/light"
+                android:layout_centerVertical="true"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lampu UV"
+                android:layout_toRightOf="@+id/light"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/margin_text"
+
+                />
+
+            <ToggleButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:id="@+id/btnLampu"
+                />
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_text"
+            >
+            <ImageView
+                android:layout_width="@dimen/profile_icon_size"
+                android:layout_height="@dimen/profile_icon_size"
+                android:src="@drawable/ic_kipas"
+                android:layout_centerVertical="true"
+                android:id="@+id/kipas"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Kipas"
+                android:layout_toRightOf="@+id/kipas"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/margin_text"
+                />
+
+            <ToggleButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:id="@+id/btnKipas"
+                />
+
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/greysoft"
+            android:layout_marginTop="@dimen/margin_text_more"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Data Setting"
+            android:layout_marginTop="@dimen/margin_text_more"
+            />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_text_more"
+            android:orientation="horizontal"
+            >
+            <ImageView
+                android:layout_width="@dimen/profile_icon_size"
+                android:layout_height="@dimen/profile_icon_size"
+                android:src="@drawable/icons8temperature96"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Suhu : 80"
+                android:id="@+id/tvSettingSuhu"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/margin_text_less"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_text_more"
+            android:orientation="horizontal"
+            >
+            <ImageView
+                android:layout_width="@dimen/profile_icon_size"
+                android:layout_height="@dimen/profile_icon_size"
+                android:src="@drawable/icons8wet90"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Kelembapan : 80"
+                android:id="@+id/tvSettingKelembapan"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/margin_text_less"
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_text_more"
+            android:orientation="horizontal"
+            >
+            <ImageView
+                android:layout_width="@dimen/profile_icon_size"
+                android:layout_height="@dimen/profile_icon_size"
+                android:src="@drawable/icon_soil"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Kelembapan Tanah : 80"
+                android:id="@+id/tvSettingKelembapanTanah"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/margin_text_less"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_text_more"
+            android:orientation="horizontal"
+            >
+            <ImageView
+                android:layout_width="@dimen/profile_icon_size"
+                android:layout_height="@dimen/profile_icon_size"
+                android:src="@drawable/icons8sunrise64"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cahaya : 80"
+                android:id="@+id/tvSettingCahaya"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/margin_text_less"
+                />
+
+        </LinearLayout>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_text"
+            android:text="Update Setting Data"
+            android:id="@+id/btnUpdateSetting"
+            />
+
+    </LinearLayout>
+
+
+</ScrollView>
+
+</LinearLayout>

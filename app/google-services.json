@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "787058737194",
+    "firebase_url": "https://pythonfirebaseiot.firebaseio.com",
+    "project_id": "pythonfirebaseiot",
+    "storage_bucket": "pythonfirebaseiot.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:787058737194:android:aa9e61d85c6541be368353",
+        "android_client_info": {
+          "package_name": "com.chanifq.gardenIOT"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "787058737194-28e5fgjs8co863jc9tahlqclsv0276gj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.chanifq.gardenIOT",
+            "certificate_hash": "0d05ac54d0e10ddc54d4030b1a0583cc03f57416"
+          }
+        },
+        {
+          "client_id": "787058737194-pt4g9n1hjcbameh1k3vn7i43n7o7runk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCYm1L38UyMIrWgX2T3iDfAjrPa_gVmhL8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "787058737194-pt4g9n1hjcbameh1k3vn7i43n7o7runk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

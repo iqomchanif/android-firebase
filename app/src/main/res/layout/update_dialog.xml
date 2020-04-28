@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/margin_text_more"
+        android:layout_marginTop="@dimen/margin_text"
+        android:layout_marginRight="@dimen/margin_text_more"
+        android:orientation="vertical">
+
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="10"
+            android:orientation="horizontal"
+            >
+            <ImageView
+                android:layout_width="@dimen/profile_icon_size"
+                android:layout_height="@dimen/profile_icon_size"
+                android:src="@drawable/icons8temperature96"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="@dimen/margin_text"
+                />
+
+            <EditText
+                android:id="@+id/txt_suhu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@android:drawable/editbox_background_normal"
+                android:hint="suhu"
+                android:textSize="@dimen/fontsize_item" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="10"
+            android:orientation="horizontal"
+            >
+            <ImageView
+                android:layout_width="@dimen/profile_icon_size"
+                android:layout_height="@dimen/profile_icon_size"
+                android:src="@drawable/icons8wet90"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="@dimen/margin_text"
+                />
+
+            <EditText
+                android:id="@+id/txt_kelembapan"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@android:drawable/editbox_background_normal"
+                android:hint="kelembapan"
+                android:textSize="@dimen/fontsize_item"
+                android:layout_weight="10"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="10"
+            android:orientation="horizontal"
+            >
+            <ImageView
+                android:layout_width="@dimen/profile_icon_size"
+                android:layout_height="@dimen/profile_icon_size"
+                android:src="@drawable/icon_soil"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="@dimen/margin_text"
+                />
+
+            <EditText
+                android:id="@+id/txt_kelembapanTanah"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@android:drawable/editbox_background_normal"
+                android:hint="kelembapan tanah"
+                android:textSize="@dimen/fontsize_item"
+                android:layout_weight="10"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="10"
+            android:orientation="horizontal"
+            >
+            <ImageView
+                android:layout_width="@dimen/profile_icon_size"
+                android:layout_height="@dimen/profile_icon_size"
+                android:src="@drawable/icons8sunrise64"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="@dimen/margin_text"
+                />
+
+            <EditText
+                android:id="@+id/txt_cahaya"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@android:drawable/editbox_background_normal"
+                android:hint="cahaya"
+                android:textSize="@dimen/fontsize_item"
+                android:layout_weight="10"
+                />
+        </LinearLayout>
+
+
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

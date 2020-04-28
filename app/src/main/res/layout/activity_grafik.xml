@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.Toolbar
+
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/yellowbackground"
+
+
+                />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="filter data"
+            android:textSize="@dimen/fontsize_menu_child"
+            android:layout_marginLeft="@dimen/margin_text"
+            android:layout_marginBottom="@dimen/margin_text"
+            />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="@dimen/margin_text"
+            android:layout_marginRight="@dimen/margin_text"
+
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tanggal mulai"
+                android:id="@+id/title1"
+
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="-"
+                android:layout_marginLeft="@dimen/margin_text_more_more"
+                android:layout_toRightOf="@+id/title1"
+                android:id="@+id/tvTanggalAwal"
+                />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="set tanggal mulai"
+                android:id="@+id/btnfilter"
+                android:layout_alignParentEnd="true"
+                android:background="@drawable/yellow_corner"
+                android:paddingLeft="@dimen/margin_text"
+                android:paddingRight="@dimen/margin_text"
+                />
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="@dimen/margin_text"
+            android:layout_marginRight="@dimen/margin_text"
+            android:layout_marginTop="5dp"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tanggal akhir "
+                android:id="@+id/title2"
+
+                />
+
+            <TextView
+                android:id="@+id/tvTanggalAkhir"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_text_more_more"
+                android:layout_toRightOf="@+id/title2"
+                android:layout_marginTop="1dp"
+                android:text="-" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="set tanggal akhir "
+                android:id="@+id/btnfilter2"
+                android:layout_alignParentEnd="true"
+                android:background="@drawable/yellow_corner"
+                android:paddingLeft="@dimen/margin_text"
+                android:paddingRight="@dimen/margin_text"
+
+                />
+
+        </RelativeLayout>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Filter data"
+            android:background="@drawable/white_border_corner"
+            android:layout_marginLeft="@dimen/margin_text"
+            android:layout_marginRight="@dimen/margin_text"
+            android:layout_marginTop="5dp"
+            android:paddingTop="2dp"
+            android:paddingBottom="2dp"
+            android:id="@+id/btnGOFilter"
+
+            />
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/heightGrafik"
+                    android:layout_margin="10dp"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:gravity="center_vertical"
+                        >
+                        <ImageView
+                            android:layout_width="@dimen/profile_icon_size"
+                            android:layout_height="@dimen/profile_icon_size"
+                            android:src="@drawable/icons8wet90"
+                            />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Data Humidity"
+                            android:textSize="@dimen/fontsize_menu_child"
+                            android:layout_marginLeft="5dp"
+                            />
+
+                    </LinearLayout>
+
+                    <com.github.mikephil.charting.charts.LineChart
+                        android:id="@+id/chartHumidity"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/heightGrafik"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:gravity="center_vertical"
+                        >
+                        <ImageView
+                            android:layout_width="@dimen/profile_icon_size"
+                            android:layout_height="@dimen/profile_icon_size"
+                            android:src="@drawable/icons8sunrise64"
+                            />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Data Light"
+                            android:textSize="@dimen/fontsize_menu_child"
+                            android:layout_marginLeft="5dp"
+                            />
+
+                    </LinearLayout>
+
+                    <com.github.mikephil.charting.charts.LineChart
+                        android:id="@+id/chartLight"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/heightGrafik"
+                    android:layout_margin="10dp"
+                    android:orientation="vertical"
+
+                    >
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:gravity="center_vertical"
+                        >
+                        <ImageView
+                            android:layout_width="@dimen/profile_icon_size"
+                            android:layout_height="@dimen/profile_icon_size"
+                            android:src="@drawable/icons8temperature96"
+                            />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Data Temperature"
+                            android:textSize="@dimen/fontsize_menu_child"
+                            android:layout_marginLeft="5dp"
+                            />
+
+                    </LinearLayout>
+
+                    <com.github.mikephil.charting.charts.LineChart
+                        android:id="@+id/chartTemperature"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/heightGrafik"
+                    android:layout_margin="10dp"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:gravity="center_vertical"
+                        >
+                        <ImageView
+                            android:layout_width="@dimen/profile_icon_size"
+                            android:layout_height="@dimen/profile_icon_size"
+                            android:src="@drawable/icons8wet90"
+                            />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Data Humidity Tanah"
+                            android:textSize="@dimen/fontsize_menu_child"
+                            android:layout_marginLeft="5dp"
+                            />
+
+                    </LinearLayout>
+
+                    <com.github.mikephil.charting.charts.LineChart
+                        android:id="@+id/chartHumidityTanah"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+        </ScrollView>
+
+
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

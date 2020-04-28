@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!--        <LinearLayout-->
+        <!--            android:id="@+id/layTitle"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_below="@+id/layBar"-->
+        <!--            android:background="@color/grey"-->
+        <!--            android:gravity="center_vertical"-->
+        <!--            android:orientation="horizontal">-->
+
+        <!--            <ImageView-->
+        <!--                android:layout_width="@dimen/profile_icon_size"-->
+        <!--                android:layout_height="@dimen/profile_icon_size"-->
+        <!--                android:layout_marginLeft="@dimen/margin_text"-->
+        <!--                android:src="@drawable/ic_history_black" />-->
+
+        <!--            <TextView-->
+        <!--                android:id="@+id/tvTitle"-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_margin="@dimen/margin_text"-->
+        <!--                android:layout_marginBottom="@dimen/margin_text"-->
+        <!--                android:text="Riwayat Mutasi hari ini"-->
+        <!--                android:textSize="@dimen/fontsize_item" />-->
+
+        <!--        </LinearLayout>-->
+
+        <!--        <LinearLayout-->
+        <!--            android:id="@+id/layButton"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="50dp"-->
+        <!--            android:orientation="horizontal"-->
+        <!--            android:weightSum="1">-->
+
+        <!--            <Button-->
+        <!--                style="@style/Widget.AppCompat.Button.Borderless"-->
+        <!--                android:layout_width="0dp"-->
+        <!--                android:layout_height="match_parent"-->
+        <!--                android:layout_weight="0.5"-->
+        <!--                android:text="Rangkuman hari ini" />-->
+
+        <!--            <Button-->
+        <!--                style="@style/Widget.AppCompat.Button.Borderless"-->
+        <!--                android:layout_width="0dp"-->
+        <!--                android:layout_height="match_parent"-->
+        <!--                android:layout_weight="0.5"-->
+        <!--                android:text="List Riwayat" />-->
+        <!--        </LinearLayout>-->
+
+        <!--        <LinearLayout-->
+        <!--            android:id="@+id/layBar"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="10dp"-->
+        <!--            android:layout_below="@+id/layButton"-->
+        <!--            android:orientation="horizontal"-->
+        <!--            android:weightSum="1">-->
+
+        <!--            <TextView-->
+        <!--                android:layout_width="0dp"-->
+        <!--                android:layout_height="match_parent"-->
+        <!--                android:layout_weight="0.5"-->
+        <!--                android:background="@color/yellowbackground" />-->
+
+        <!--            <TextView-->
+        <!--                android:layout_width="0dp"-->
+        <!--                android:layout_height="match_parent"-->
+        <!--                android:layout_weight="0.5"-->
+        <!--                android:background="@color/greysoft" />-->
+
+        <!--        </LinearLayout>-->
+
+        <androidx.appcompat.widget.Toolbar
+
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/yellowbackground"
+
+
+            />
+
+        <FrameLayout
+            android:id="@+id/fl_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/toolbar"
+            android:layout_above="@id/nav_view"
+
+            />
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/nav_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="0dp"
+            android:layout_marginEnd="0dp"
+            android:layout_alignParentBottom="true"
+            android:background="?android:attr/windowBackground"
+            app:menu="@menu/bottom_menu"
+            />
+
+
+
+<!--        <com.google.android.material.bottomnavigation.BottomNavigationView-->
+<!--            android:id="@+id/nav_view"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="0dp"-->
+<!--            android:layout_marginEnd="0dp"-->
+<!--            android:background="?android:attr/windowBackground"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintLeft_toLeftOf="parent"-->
+<!--            app:layout_constraintRight_toRightOf="parent"-->
+<!--            app:menu="@menu/bottom_menu"-->
+<!--            />-->
+
+
+
+
+    </RelativeLayout>
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

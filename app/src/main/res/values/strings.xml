@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Gudangku</string>
+    <string name="action_settings">Settings</string>
+    <string name="preorder">preorder</string>
+    <string name="order">order</string>
+    <string name="serve">serve</string>
+    <string name="history">history</string>
+    <string name="account">account</string>
+    <string-array name="arusmutasi">
+        <item>in</item>
+        <item>out</item>
+    </string-array>
+</resources>
