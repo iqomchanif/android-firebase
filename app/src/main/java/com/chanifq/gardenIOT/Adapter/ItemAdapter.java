@@ -82,9 +82,9 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         holder.tvTemp.setText(lastTemp);
         holder.tvTanah.setText(lastHumiTanah);
 
-        holder.imgKipas.setVisibility(listItem.get(position).getDataSetting().getKipas().equals("1")?View.VISIBLE:View.INVISIBLE);
-        holder.imgSemprot.setVisibility(listItem.get(position).getDataSetting().getSemprot().equals("1")?View.VISIBLE:View.INVISIBLE);
-        holder.imgLampu.setVisibility(listItem.get(position).getDataSetting().getled().equals("1")?View.VISIBLE:View.INVISIBLE);
+        holder.imgKipas.setVisibility(listItem.get(position).getDataSetting().getKipas().equals("1")?View.VISIBLE:View.GONE);
+        holder.imgSemprot.setVisibility(listItem.get(position).getDataSetting().getSemprot().equals("1")?View.VISIBLE:View.GONE);
+        holder.imgLampu.setVisibility(listItem.get(position).getDataSetting().getled().equals("1")?View.VISIBLE:View.GONE);
     }
 
 

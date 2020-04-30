@@ -244,11 +244,15 @@ public class GrafikActivity extends AppCompatActivity {
 
 
     public void updateGrafik() {
-        if (filterStatus)
+        if (filterStatus) {
+           Log.d("updategrafik",tglAwal+";"+tglAkhir);
             getValue(tglAwal, tglAkhir);
-        else
-            getValue();
+        }
+        else {
+            Log.d("updategrafik","malah nag kene");
 
+            getValue();
+        }
         renderData(chartHumi, valuesHumi);
         renderData(chartTemp, valuesTemp);
         renderData(chartLight, valuesLight);
@@ -270,7 +274,7 @@ public class GrafikActivity extends AppCompatActivity {
             if (data.getY() > maxData)
                 maxData = data.getY();
         }
-        float yAxisMax = (float) (maxData * 1.25);
+        float yAxisMax = (float) (maxData * 1.6);
         XAxis xAxis = lineChart.getXAxis();
         xAxis.enableGridDashedLine(10, 10, 0);
         xAxis.setAxisMaximum(value.size());
@@ -286,8 +290,8 @@ public class GrafikActivity extends AppCompatActivity {
         leftAxis.setDrawZeroLine(false);
         leftAxis.setDrawLimitLinesBehindData(false);
 //        lineChart.getDescription().setText("Grafik Item Transaksi");
-
-        lineChart.getAxisRight().setEnabled(true);
+        lineChart.getDescription().setEnabled(false);
+        lineChart.getAxisRight().setEnabled(false);
         setData(lineChart, value);
         lineChart.notifyDataSetChanged();
         lineChart.invalidate();

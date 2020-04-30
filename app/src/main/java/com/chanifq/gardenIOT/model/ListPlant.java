@@ -17,6 +17,8 @@ Setting dataSetting;
             DataPlant newplant= new DataPlant(plant.getId(),plant.getName(),plant.getHumidityTanah(),plant.getHumidity(),plant.getTemperature(),plant.getLight(),plant.getCreated_at());
             this.plants.add(newplant);
         }
+        Setting setting= new Setting(name,"","","","","","");
+        this.dataSetting=(setting);
     }
 
     public ListPlant(int ID, String name, ArrayList<DataPlant> plants, Setting dataSetting) {

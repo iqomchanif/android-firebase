@@ -140,14 +140,14 @@ public class DateHelper {
             return(1);
         else if(Integer.parseInt(year1)<Integer.parseInt(year2))
             return(0);
-        String month1=a.split("-")[2];
-        String month2=b.split("-")[2];
+        String month1=a.split("-")[1];
+        String month2=b.split("-")[1];
         if(Integer.parseInt(month1)>Integer.parseInt(month2))
             return(1);
         else if(Integer.parseInt(month1)<Integer.parseInt(month2))
             return(0);
         String tgl1= a.split("-")[0];
-        String tgl2=a.split("-")[0];
+        String tgl2=b.split("-")[0];
         if(Integer.parseInt(tgl1)>Integer.parseInt(tgl2))
             return(1);
         else if(Integer.parseInt(tgl1)<Integer.parseInt(tgl2))
@@ -162,14 +162,14 @@ public class DateHelper {
             return(0);
         else if(Integer.parseInt(year1)<Integer.parseInt(year2))
             return(1);
-        String month1=a.split("-")[2];
-        String month2=b.split("-")[2];
+        String month1=a.split("-")[1];
+        String month2=b.split("-")[1];
         if(Integer.parseInt(month1)>Integer.parseInt(month2))
             return(0);
         else if(Integer.parseInt(month1)<Integer.parseInt(month2))
             return(1);
         String tgl1= a.split("-")[0];
-        String tgl2=a.split("-")[0];
+        String tgl2=b.split("-")[0];
         if(Integer.parseInt(tgl1)>Integer.parseInt(tgl2))
             return(0);
         else if(Integer.parseInt(tgl1)<Integer.parseInt(tgl2))

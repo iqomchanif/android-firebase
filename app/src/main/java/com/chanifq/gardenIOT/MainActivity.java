@@ -48,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<Setting> listSetting;
     BottomNavigationView nav;
     GlobalClass globalClass;
+    long timeConnect;
+    int iUpdate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
         databaseReferencePlant = database.getReference().child("pythonfirebaseiot").child("Plants");
         databaseReferenceSetting = database.getReference().child("pythonfirebaseiot").child("Setting");
+        iUpdate=0;
         initFragment();
         loadFragment(fragmentList);
         globalClass = (GlobalClass) getApplicationContext();
@@ -90,6 +93,21 @@ public class MainActivity extends AppCompatActivity {
         final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitleTextColor(Color.WHITE);
         toolbar.setTitle("My Garden IOT");
+        timeConnect= (savedInstanceState == null)?0:Integer.valueOf(savedInstanceState.getString("timeConnect"));
+        final Handler handler= new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if(System.currentTimeMillis()-timeConnect>20000){
+                    toolbar.setBackgroundResource(R.color.red);
+                }
+                else{
+                    toolbar.setBackgroundResource(R.color.yellowbackgrounddarker);
+
+                }
+                handler.postDelayed(this, 2000);
+            }
+        },2000);
     }
 
     @Override
@@ -99,11 +117,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Log.d("addEventListenOy", "masuk");
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-//                Log.d("firebase_plants",dataSnapshot.getChildren());
-//
-//                );
                 listPlants.clear();
                 ArrayList<DataPlant> arrayPlant = new ArrayList<>();
                 int iPlant = 0;
@@ -112,30 +125,43 @@ public class MainActivity extends AppCompatActivity {
 //                    Log.d("firebase_plants",plantSnapshot.getKey());
                     String name = plantSnapshot.getKey();
                     arrayPlant.clear();
+                    int error = 0;
                     int i = 0;
                     for (DataSnapshot plantDetail : plantSnapshot.getChildren()) {
-                        Log.d("snapplantdetail", plantDetail.toString());
-                        DataPlant plant = plantDetail.getValue(DataPlant.class);
-//                        Log.d("firebase_plants_value","humi:"+ plant.getHumidity());
-//                        Log.d("firebase_plants_value","temp:"+ plant.getTemperature());
-//                        Log.d("firebase_plants_value","light:"+plant.getLight());
-                        String temp = plant.getTemperature();
-                        String humi = plant.getHumidity();
-                        String light = plant.getLight();
-                        String created = plant.getCreated_at();
-                        String humiTanah = plant.getHumidityTanah();
-                        DataPlant itemPlant = new DataPlant(String.valueOf(i), name, humiTanah, humi, temp, light, created);
-                        i = i + 1;
-                        arrayPlant.add(itemPlant);
+
+                        try {
+                            DataPlant plant = plantDetail.getValue(DataPlant.class);
+                            //                        Log.d("firebase_plants_value","humi:"+ plant.getHumidity());
+                            //                        Log.d("firebase_plants_value","temp:"+ plant.getTemperature());
+                            //                        Log.d("firebase_plants_value","light:"+plant.getLight());
+                            String temp = plant.getTemperature();
+                            String humi = plant.getHumidity();
+                            String light = plant.getLight();
+                            String created = plant.getCreated_at();
+                            String humiTanah = plant.getHumidityTanah();
+
+                            DataPlant itemPlant = new DataPlant(String.valueOf(i), name, humiTanah, humi, temp, light, created);
+                            i = i + 1;
+                            arrayPlant.add(itemPlant);
+
+                        } catch (Exception e) {
+                            error += 1;
+                            Log.d("datasnapshot","error"+error);
+                            Log.d("snapplantdetail", plantDetail.toString());
+                        }
                     }
+//                    Toast.makeText(MainActivity.this, "get " + error + " data error", Toast.LENGTH_SHORT).show();
                     iPlant++;
                     ListPlant list = new ListPlant(iPlant, name, arrayPlant);
                     listPlants.add(list);
                 }
                 GlobalClass globalClass = (GlobalClass) getApplicationContext();
                 globalClass.setListPlants(listPlants);
-                if(globalClass.getState()=="list")
+                if (globalClass.getState() == "list")
                     fragmentList.setRvItem(listPlants);
+                if(iUpdate>=3)
+                    timeConnect=System.currentTimeMillis();
+                iUpdate++;
             }
 
             @Override
@@ -149,13 +175,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 listSetting.clear();
+                Log.d("datachange","plants");
                 for (DataSnapshot plantSnapshot : dataSnapshot.getChildren()) {
                     String name = plantSnapshot.getKey();
-                    String getID = "", kipas = "", light = "", semprot = "", valueSetting = "",mode="";
+                    String getID = "", kipas = "", light = "", semprot = "", valueSetting = "", mode = "";
 
                     Log.d("setting", "getgetget");
                     for (DataSnapshot data : plantSnapshot.getChildren()) {
-                        Log.d("firebase_setting", name );
+                        Log.d("firebase_setting", name);
                         Log.d("firebase_setting", data.toString());
                         getID = data.getKey();
                         Setting datasetting = data.getValue(Setting.class);
@@ -163,12 +190,13 @@ public class MainActivity extends AppCompatActivity {
                         light = datasetting.getled();
                         semprot = datasetting.getSemprot();
                         valueSetting = datasetting.getValueSettingHThL();
-                        mode=datasetting.getMode();
-                        Setting setting = new Setting(name,getID,semprot, light, kipas, valueSetting,mode);
+                        mode = datasetting.getMode();
+                        Setting setting = new Setting(name, getID, semprot, light, kipas, valueSetting, mode);
                         listSetting.add(setting);
-                        for(ListPlant list: listPlants){
-                            if(list.getName().equals(name)){
+                        for (ListPlant list : listPlants) {
+                            if (list.getName().equals(name)) {
                                 list.setDataSetting(setting);
+                                Log.d("firebase_setting", "update-listplant-setting");
                             }
                         }
 
@@ -181,8 +209,10 @@ public class MainActivity extends AppCompatActivity {
                     Log.d("firebase_setting", setting.getIDsetting());
 
                 }
-                if(globalClass.getState()=="remote")
+                if (globalClass.getState() == "remote")
                     fragmentRemote.updateData(listSetting);
+                if(iUpdate>=5)
+                    timeConnect=System.currentTimeMillis();
 
             }
 
@@ -192,7 +222,12 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
 
+        savedInstanceState.putString("timeConnect", String.valueOf(timeConnect));
+    }
     public ArrayList<DataPlant> getDataPlantOf(String name) {
         ArrayList<DataPlant> buff = new ArrayList<DataPlant>();
         for (ListPlant list : listPlants) {
@@ -208,25 +243,6 @@ public class MainActivity extends AppCompatActivity {
         return (buff);
     }
 
-    private void addPlant(String name, String humi, String temp, String light) {
-        // Write a message to the database
-//        String id= databaseReferencePlant.push().getKey();
-//        DataPlant plant= new DataPlant(id,name,humi,temp,light);
-//        databaseReferencePlant.child(id).setValue(plant);
-//        Toast.makeText(getApplicationContext(),"succes",Toast.LENGTH_SHORT).show();
-    }
-
-//    private void addHistoryGarden(String name, String humi, String temp, String light) {
-//        String id= databaseReferenceHistoryGarden.push().getKey();
-//        Garden garden= new Garden(id,name,humi,temp,light);
-//        databaseReferenceHistoryGarden.child(id).setValue(garden);
-//        Toast.makeText(getApplicationContext(),"succes",Toast.LENGTH_SHORT).show();
-//
-//    }
-
-    private void getPlant() {
-
-    }
 
     void initFragment() {
         fragmentList = new FragmentList();
