@@ -18,7 +18,7 @@
     <style name="UbuntuTextViewStyle" parent="android:Widget.TextView">
         <item name="android:fontFamily">@font/font</item>
     </style>
-
+git
     <style name="UbuntuButtonStyle" parent="android:Widget.Button">
         <item name="android:fontFamily">@font/font</item>
     </style>

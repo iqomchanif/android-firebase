@@ -1,7 +1,4 @@
-package com.chanifq.gardenIOT.model;
-
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
+package com.iyus.gardenIOT.model;
 
 public class DataPlant {
 
@@ -13,8 +10,9 @@ public class DataPlant {
     String temperature;
     String light;
     String created_at;
+    String clock_at;
 
-    public DataPlant(String id, String name, String humidityTanah, String humidity, String temperature, String light, String created_at) {
+    public DataPlant(String id, String name, String humidityTanah, String humidity, String temperature, String light, String created_at, String clock_at) {
         this.id = id;
         this.name = name;
         this.humidityTanah = humidityTanah;
@@ -22,6 +20,15 @@ public class DataPlant {
         this.temperature = temperature;
         this.light = light;
         this.created_at = created_at;
+        this.clock_at = clock_at;
+    }
+
+    public String getClock_at() {
+        return clock_at;
+    }
+
+    public void setClock_at(String clock_at) {
+        this.clock_at = clock_at;
     }
 
     public String getHumidityTanah() {

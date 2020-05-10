@@ -1,4 +1,4 @@
-package com.chanifq.gardenIOT.Fragment;
+package com.iyus.gardenIOT.Fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,9 +11,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.chanifq.gardenIOT.Adapter.ItemAdapter;
-import com.chanifq.gardenIOT.R;
-import com.chanifq.gardenIOT.model.ListPlant;
+import com.iyus.gardenIOT.Adapter.ItemAdapter;
+import com.iyus.gardenIOT.R;
+import com.iyus.gardenIOT.model.ListPlant;
 
 import java.util.ArrayList;
 

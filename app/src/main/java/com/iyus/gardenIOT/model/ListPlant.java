@@ -1,4 +1,4 @@
-package com.chanifq.gardenIOT.model;
+package com.iyus.gardenIOT.model;
 
 import java.util.ArrayList;
 
@@ -14,7 +14,7 @@ Setting dataSetting;
         this.name = name;
         this.plants = new ArrayList<DataPlant>();
         for(DataPlant plant:plants){
-            DataPlant newplant= new DataPlant(plant.getId(),plant.getName(),plant.getHumidityTanah(),plant.getHumidity(),plant.getTemperature(),plant.getLight(),plant.getCreated_at());
+            DataPlant newplant= new DataPlant(plant.getId(),plant.getName(),plant.getHumidityTanah(),plant.getHumidity(),plant.getTemperature(),plant.getLight(),plant.getCreated_at(),plant.getClock_at());
             this.plants.add(newplant);
         }
         Setting setting= new Setting(name,"","","","","","");

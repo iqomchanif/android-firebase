@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.chanifq.gardenIOT">
+    package="com.iyus.gardenIOT">
 
     <application
-        android:name=".model.GlobalClass"
+        android:name="com.iyus.gardenIOT.model.GlobalClass"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="GardenIOT"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".GrafikActivity"></activity>
-        <activity android:name=".MainActivity"></activity>
-        <activity android:name=".SplashScreen">
+        <activity android:name="com.iyus.gardenIOT.GrafikActivity"></activity>
+        <activity android:name="com.iyus.gardenIOT.MainActivity"></activity>
+        <activity android:name="com.iyus.gardenIOT.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

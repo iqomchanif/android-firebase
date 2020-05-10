@@ -1,10 +1,7 @@
-package com.chanifq.gardenIOT.Adapter;
+package com.iyus.gardenIOT.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.provider.ContactsContract;
-import android.provider.Settings;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,12 +13,11 @@ import androidx.cardview.widget.CardView;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.chanifq.gardenIOT.GrafikActivity;
-import com.chanifq.gardenIOT.MainActivity;
-import com.chanifq.gardenIOT.R;
-import com.chanifq.gardenIOT.model.DataPlant;
-import com.chanifq.gardenIOT.model.GlobalClass;
-import com.chanifq.gardenIOT.model.ListPlant;
+import com.iyus.gardenIOT.GrafikActivity;
+import com.iyus.gardenIOT.R;
+import com.iyus.gardenIOT.model.DataPlant;
+import com.iyus.gardenIOT.model.GlobalClass;
+import com.iyus.gardenIOT.model.ListPlant;
 import com.google.android.gms.common.internal.GmsLogger;
 
 import java.util.ArrayList;

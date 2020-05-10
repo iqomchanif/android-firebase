@@ -1,6 +1,4 @@
-package com.chanifq.gardenIOT.model;
-
-import java.util.ArrayList;
+package com.iyus.gardenIOT.model;
 
 public class Setting {
     String name;

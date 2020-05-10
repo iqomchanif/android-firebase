@@ -1,4 +1,4 @@
-package com.chanifq.gardenIOT.helper;
+package com.iyus.gardenIOT.helper;
 
 public class StringHelper {
     public StringHelper(){

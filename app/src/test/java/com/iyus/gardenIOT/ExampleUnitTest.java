@@ -1,4 +1,4 @@
-package com.chanifq.gardenIOT;
+package com.iyus.gardenIOT;
 
 import org.junit.Test;
 

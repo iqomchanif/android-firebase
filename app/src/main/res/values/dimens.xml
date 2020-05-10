@@ -50,7 +50,7 @@
     <dimen name="profile_icon_small_size">25dp</dimen>
     <dimen name="heightbg">100dp</dimen>
 
-    <dimen name="heightGrafik">200dp</dimen>
+    <dimen name="heightGrafik">350dp</dimen>
 
 
 </resources>

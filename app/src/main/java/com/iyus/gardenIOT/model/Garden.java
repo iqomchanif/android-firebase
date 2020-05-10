@@ -1,4 +1,4 @@
-package com.chanifq.gardenIOT.model;
+package com.iyus.gardenIOT.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

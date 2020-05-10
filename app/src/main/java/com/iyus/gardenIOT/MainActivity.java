@@ -1,32 +1,24 @@
-package com.chanifq.gardenIOT;
+package com.iyus.gardenIOT;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.ClipData;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
-import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
 
-import com.chanifq.gardenIOT.Adapter.ItemAdapter;
-import com.chanifq.gardenIOT.Fragment.FragmentList;
-import com.chanifq.gardenIOT.Fragment.FragmentRemote;
-import com.chanifq.gardenIOT.model.DataPlant;
-import com.chanifq.gardenIOT.model.Garden;
-import com.chanifq.gardenIOT.model.GlobalClass;
-import com.chanifq.gardenIOT.model.ListPlant;
-import com.chanifq.gardenIOT.model.Setting;
+import com.iyus.gardenIOT.Adapter.ItemAdapter;
+import com.iyus.gardenIOT.Fragment.FragmentList;
+import com.iyus.gardenIOT.Fragment.FragmentRemote;
+import com.iyus.gardenIOT.model.DataPlant;
+import com.iyus.gardenIOT.model.GlobalClass;
+import com.iyus.gardenIOT.model.ListPlant;
+import com.iyus.gardenIOT.model.Setting;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -56,8 +48,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         database = FirebaseDatabase.getInstance();
-        databaseReferencePlant = database.getReference().child("pythonfirebaseiot").child("Plants");
-        databaseReferenceSetting = database.getReference().child("pythonfirebaseiot").child("Setting");
+        databaseReferencePlant = database.getReference().child("gardeniot-c4aed").child("Plants");
+        databaseReferenceSetting = database.getReference().child("gardeniot-c4aed").child("Setting");
         iUpdate=0;
         initFragment();
         loadFragment(fragmentList);
@@ -84,6 +76,13 @@ public class MainActivity extends AppCompatActivity {
                             globalClass.setState("list");
                         } else {
                             loadFragment(fragmentRemote);
+                            Handler handler= new Handler();
+                            handler.postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    fragmentRemote.updateData(listSetting);
+                                }
+                            }, 100);
                             globalClass.setState("remote");
                         }
                         return true;
@@ -121,8 +120,8 @@ public class MainActivity extends AppCompatActivity {
                 ArrayList<DataPlant> arrayPlant = new ArrayList<>();
                 int iPlant = 0;
                 for (DataSnapshot plantSnapshot : dataSnapshot.getChildren()) {
-                    Log.d("snapplantsnapshot", plantSnapshot.toString());
-//                    Log.d("firebase_plants",plantSnapshot.getKey());
+                    Log.d("firebase_plants", plantSnapshot.toString());
+                    Log.d("firebase_plants",plantSnapshot.getKey());
                     String name = plantSnapshot.getKey();
                     arrayPlant.clear();
                     int error = 0;
@@ -139,8 +138,9 @@ public class MainActivity extends AppCompatActivity {
                             String light = plant.getLight();
                             String created = plant.getCreated_at();
                             String humiTanah = plant.getHumidityTanah();
+                            String clockAt=plant.getClock_at();
 
-                            DataPlant itemPlant = new DataPlant(String.valueOf(i), name, humiTanah, humi, temp, light, created);
+                            DataPlant itemPlant = new DataPlant(String.valueOf(i), name, humiTanah, humi, temp, light, created,clockAt);
                             i = i + 1;
                             arrayPlant.add(itemPlant);
 
@@ -159,6 +159,8 @@ public class MainActivity extends AppCompatActivity {
                 globalClass.setListPlants(listPlants);
                 if (globalClass.getState() == "list")
                     fragmentList.setRvItem(listPlants);
+                if (globalClass.getState() == "remote")
+                    fragmentRemote.updateData(listSetting);
                 if(iUpdate>=3)
                     timeConnect=System.currentTimeMillis();
                 iUpdate++;
@@ -211,8 +213,11 @@ public class MainActivity extends AppCompatActivity {
                 }
                 if (globalClass.getState() == "remote")
                     fragmentRemote.updateData(listSetting);
+                if (globalClass.getState() == "list")
+                    fragmentList.setRvItem(listPlants);
                 if(iUpdate>=5)
                     timeConnect=System.currentTimeMillis();
+                iUpdate++;
 
             }
 
@@ -262,7 +267,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void setUpdateData(String plantName, String device, String state) {
-        DatabaseReference databaseReference = database.getReference().child("pythonfirebaseiot")
+        DatabaseReference databaseReference = database.getReference().child("gardeniot-c4aed")
                 .child("Setting").child(plantName);
         Log.d("firebase", "set Semprot");
         for (Setting setting : listSetting) {

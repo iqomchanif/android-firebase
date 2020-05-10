@@ -1,4 +1,4 @@
-package com.chanifq.gardenIOT.model;
+package com.iyus.gardenIOT.model;
 
 import android.app.Application;
 

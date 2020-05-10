@@ -1,4 +1,4 @@
-package com.chanifq.gardenIOT.Fragment;
+package com.iyus.gardenIOT.Fragment;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.ToggleButton;
@@ -18,13 +17,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.chanifq.gardenIOT.MainActivity;
-import com.chanifq.gardenIOT.R;
-import com.chanifq.gardenIOT.model.GlobalClass;
-import com.chanifq.gardenIOT.model.ListPlant;
-import com.chanifq.gardenIOT.model.Setting;
-
-import org.w3c.dom.Text;
+import com.iyus.gardenIOT.MainActivity;
+import com.iyus.gardenIOT.R;
+import com.iyus.gardenIOT.model.GlobalClass;
+import com.iyus.gardenIOT.model.ListPlant;
+import com.iyus.gardenIOT.model.Setting;
 
 import java.util.ArrayList;
 import java.util.List;

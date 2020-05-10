@@ -1,4 +1,4 @@
-package com.chanifq.gardenIOT;
+package com.iyus.gardenIOT;
 
 import android.app.DatePickerDialog;
 import android.graphics.Color;
@@ -9,17 +9,18 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import com.chanifq.gardenIOT.helper.DateHelper;
-import com.chanifq.gardenIOT.model.DataPlant;
-import com.chanifq.gardenIOT.model.Garden;
-import com.chanifq.gardenIOT.model.GlobalClass;
-import com.chanifq.gardenIOT.model.ListPlant;
+import com.github.mikephil.charting.components.AxisBase;
+import com.github.mikephil.charting.formatter.IAxisValueFormatter;
+import com.iyus.gardenIOT.helper.DateHelper;
+import com.iyus.gardenIOT.model.DataPlant;
+import com.iyus.gardenIOT.model.GlobalClass;
+import com.iyus.gardenIOT.model.ListPlant;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.LimitLine;
 import com.github.mikephil.charting.components.XAxis;
@@ -44,7 +45,7 @@ public class GrafikActivity extends AppCompatActivity {
     FirebaseDatabase database;
     DatabaseReference databaseReference;
     DatabaseReference databaseReferenceHistoryGarden;
-    Button btnGarden, btnPlant;
+    Button btnGarden, btnPlant,btnKey1;
     EditText editText;
     String alamat;
     Button btnFilter, btnFilter2, btnGOFilter;
@@ -57,10 +58,12 @@ public class GrafikActivity extends AppCompatActivity {
     ArrayList<Entry> valuesLight;
     ArrayList<Entry> valuesHumiTanah;
     ArrayList<ListPlant> listPlants;
+    ArrayList<String> valuesClocks;
     Calendar myCalendar;
     TextView tvTanggalAwal, tvTanggalAkhir;
     Boolean filterStatus;
     String tglAwal, tglAkhir;
+    ScrollView sv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +71,7 @@ public class GrafikActivity extends AppCompatActivity {
         setContentView(R.layout.activity_grafik);
         database = FirebaseDatabase.getInstance();
         dataFirebase = new ArrayList<String>();
-        databaseReference = database.getReference().child("pythonfirebaseiot").child("Plants");
+        databaseReference = database.getReference().child("gardeniot-c4aed").child("Plants");
         chartHumi = findViewById(R.id.chartHumidity);
         chartHumiTanah = findViewById(R.id.chartHumidityTanah);
         chartTemp = findViewById(R.id.chartTemperature);
@@ -76,11 +79,15 @@ public class GrafikActivity extends AppCompatActivity {
         btnFilter = findViewById(R.id.btnfilter);
         btnFilter2 = findViewById(R.id.btnfilter2);
         myCalendar = Calendar.getInstance();
+        sv= findViewById(R.id.sv);
         tvTanggalAkhir = findViewById(R.id.tvTanggalAkhir);
         tvTanggalAwal = findViewById(R.id.tvTanggalAwal);
         DateHelper dateHelper= new DateHelper();
+//        btnKey1=findViewById(R.id.btnKey1);
         tglAwal=dateHelper.getDDMMYYYformat( dateHelper.getDateToday());
         tglAkhir=dateHelper.getDDMMYYYformat( dateHelper.getDateToday());
+
+
         btnFilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -167,7 +174,7 @@ public class GrafikActivity extends AppCompatActivity {
         valuesLight = new ArrayList<>();
         valuesTemp = new ArrayList<>();
         valuesHumiTanah= new ArrayList<>();
-
+        valuesClocks= new ArrayList<>();
         listPlants = new ArrayList<>();
         final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitleTextColor(Color.WHITE);
@@ -219,7 +226,9 @@ public class GrafikActivity extends AppCompatActivity {
                         String light = plant.getLight();
                         String humiTanah= plant.getHumidityTanah();
                         String createdAt = plant.getCreated_at();
-                        DataPlant itemPlant = new DataPlant(String.valueOf(i), name,humiTanah ,humi, temp, light, createdAt);
+                        String clockAt=plant.getClock_at();
+
+                        DataPlant itemPlant = new DataPlant(String.valueOf(i), name, humiTanah, humi, temp, light, createdAt,clockAt);
                         i = i + 1;
                         arrayPlant.add(itemPlant);
                     }
@@ -253,6 +262,10 @@ public class GrafikActivity extends AppCompatActivity {
 
             getValue();
         }
+        Log.d("data-entry","UPDATEEE!!!!");
+        for(Entry entry: valuesHumi){
+            Log.d("data-entry",""+entry.getX()+","+entry.getY());
+        }
         renderData(chartHumi, valuesHumi);
         renderData(chartTemp, valuesTemp);
         renderData(chartLight, valuesLight);
@@ -268,6 +281,33 @@ public class GrafikActivity extends AppCompatActivity {
         llXAxis.setLabelPosition(LimitLine.LimitLabelPosition.RIGHT_BOTTOM);
         llXAxis.setTextSize(10f);
 
+//        LimitLine llXAxis = new LimitLine(10f, "Index 10");
+//        llXAxis.setLineWidth(4f);
+//        llXAxis.enableDashedLine(10f, 10f, 0f);
+//        llXAxis.setLabelPosition(LimitLine.LimitLabelPosition.RIGHT_BOTTOM);
+//        llXAxis.setTextSize(10f);
+//
+//        ValueFormatter xAxisFormatter = new  DayAxisValueFormatter(mChart);
+//
+//        XAxis xAxis = mChart.getXAxis();
+//        xAxis.enableGridDashedLine(10, 10, 0);
+//        xAxis.setAxisMaximum(10);
+//        xAxis.setAxisMinimum(0);
+//        xAxis.setDrawLimitLinesBehindData(true);
+//        xAxis.setLabelCount(10);
+//        xAxis.setValueFormatter(xAxisFormatter);
+//        YAxis leftAxis = mChart.getAxisLeft();
+//        leftAxis.removeAllLimitLines();
+//        leftAxis.setAxisMaximum(100f);
+//        leftAxis.setAxisMinimum(0f);
+//        leftAxis.enableGridDashedLine(10f, 10f, 0f);
+//        leftAxis.setDrawZeroLine(false);
+//        leftAxis.setDrawLimitLinesBehindData(false);
+//        mChart.getDescription().setText("Grafik Item Transaksi");
+//
+//        mChart.getAxisRight().setEnabled(false);
+//        setData(mChart,value);
+
         ValueFormatter xAxisFormatter = new DayAxisValueFormatter(lineChart);
         float maxData = 0;
         for (Entry data : value) {
@@ -276,12 +316,14 @@ public class GrafikActivity extends AppCompatActivity {
         }
         float yAxisMax = (float) (maxData * 1.6);
         XAxis xAxis = lineChart.getXAxis();
+        xAxis.setLabelRotationAngle(-45);
         xAxis.enableGridDashedLine(10, 10, 0);
         xAxis.setAxisMaximum(value.size());
         xAxis.setAxisMinimum(0);
         xAxis.setDrawLimitLinesBehindData(true);
         xAxis.setLabelCount(10);
         xAxis.setValueFormatter(xAxisFormatter);
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         YAxis leftAxis = lineChart.getAxisLeft();
         leftAxis.removeAllLimitLines();
         leftAxis.setAxisMaximum(yAxisMax);
@@ -307,20 +349,12 @@ public class GrafikActivity extends AppCompatActivity {
         @Override
         public String getFormattedValue(float value) {
             int intValue = (int) value;
-//        String bulan="";
-//        switch(intValue){
-//            case 1:
-//                bulan=("jan");
-//                break;
-//            case 2:
-//                bulan=("feb");
-//                break;
-//            case 3:
-//                bulan=("mar");
-//                break;
-//
-//        }
-            return (String.valueOf(intValue));
+            try {
+                return valuesClocks.get((int) value); // xVal is a string array
+            }
+            catch (Exception e){
+                return String.valueOf(value);
+            }
         }
     }
 
@@ -370,19 +404,24 @@ public class GrafikActivity extends AppCompatActivity {
         valuesTemp.clear();
         valuesLight.clear();
         valuesHumi.clear();
+        valuesClocks.clear();
         valuesHumiTanah.clear();
         listPlants = globalClass.getListPlants();
         ArrayList<ListPlant> listPlant = globalClass.getListPlants();
         for (ListPlant list : listPlant) {
             if (list.getName().equals(globalClass.getModeNamePlant())) {
                 for (DataPlant data : list.getPlants()) {
+                    String clock= data.getClock_at();
+                    String hour=data.getCreated_at()+' '+clock.split(":")[0] +':'+clock.split(":")[1];
                     valuesTemp.add(new Entry(i, Integer.parseInt(data.getTemperature())));
                     valuesHumi.add(new Entry(i, Integer.parseInt(data.getHumidity())));
                     valuesLight.add(new Entry(i, Integer.parseInt(data.getLight())));
                     valuesHumiTanah.add(new Entry(i,Integer.parseInt(data.getHumidityTanah())));
+                    valuesClocks.add(hour);
                     i = i + 1;
-
+                    Log.d("value_axis_humi","" +Integer.parseInt(data.getHumidity()));
                 }
+                Log.d("value-axis","max="+i);
             }
         }
 
@@ -401,6 +440,7 @@ public class GrafikActivity extends AppCompatActivity {
         valuesLight.clear();
         valuesHumi.clear();
         valuesHumiTanah.clear();
+        valuesClocks.clear();
         listPlants = globalClass.getListPlants();
         ArrayList<ListPlant> listPlant = globalClass.getListPlants();
         for (ListPlant list : listPlant) {
