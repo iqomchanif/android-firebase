@@ -64,6 +64,8 @@ public class GrafikActivity extends AppCompatActivity {
     Boolean filterStatus;
     String tglAwal, tglAkhir;
     ScrollView sv;
+    String lastCreated;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -176,9 +178,10 @@ public class GrafikActivity extends AppCompatActivity {
         valuesHumiTanah= new ArrayList<>();
         valuesClocks= new ArrayList<>();
         listPlants = new ArrayList<>();
-        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitleTextColor(Color.WHITE);
         toolbar.setTitle(globalClass.getModeNamePlant());
+        toolbar.setSubtitle("last upload on ");
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -197,10 +200,11 @@ public class GrafikActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                String created_at = null;
+
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
 //                Log.d("firebase_plants",dataSnapshot.getChildren());
@@ -218,16 +222,18 @@ public class GrafikActivity extends AppCompatActivity {
                     for (DataSnapshot plantDetail : plantSnapshot.getChildren()) {
                         Log.d("snapplantdetail", plantDetail.toString());
                         DataPlant plant = plantDetail.getValue(DataPlant.class);
+                        Log.d("plant_value",plant.toString());
 //                        Log.d("firebase_plants_value","humi:"+ plant.getHumidity());
 //                        Log.d("firebase_plants_value","temp:"+ plant.getTemperature());
 //                        Log.d("firebase_plants_value","light:"+plant.getLight());
+
                         String temp = plant.getTemperature();
                         String humi = plant.getHumidity();
                         String light = plant.getLight();
                         String humiTanah= plant.getHumidityTanah();
                         String createdAt = plant.getCreated_at();
                         String clockAt=plant.getClock_at();
-
+                        created_at= createdAt + " "+clockAt.split("\\.")[0];
                         DataPlant itemPlant = new DataPlant(String.valueOf(i), name, humiTanah, humi, temp, light, createdAt,clockAt);
                         i = i + 1;
                         arrayPlant.add(itemPlant);
@@ -237,6 +243,8 @@ public class GrafikActivity extends AppCompatActivity {
 
                     listPlants.add(list);
                 }
+                lastCreated= created_at;
+                toolbar.setSubtitle("last on "+ lastCreated );
                 globalClass.setListPlants(listPlants);
                 updateGrafik();
 
@@ -411,15 +419,21 @@ public class GrafikActivity extends AppCompatActivity {
         for (ListPlant list : listPlant) {
             if (list.getName().equals(globalClass.getModeNamePlant())) {
                 for (DataPlant data : list.getPlants()) {
-                    String clock= data.getClock_at();
-                    String hour=data.getCreated_at()+' '+clock.split(":")[0] +':'+clock.split(":")[1];
-                    valuesTemp.add(new Entry(i, Integer.parseInt(data.getTemperature())));
-                    valuesHumi.add(new Entry(i, Integer.parseInt(data.getHumidity())));
-                    valuesLight.add(new Entry(i, Integer.parseInt(data.getLight())));
-                    valuesHumiTanah.add(new Entry(i,Integer.parseInt(data.getHumidityTanah())));
-                    valuesClocks.add(hour);
-                    i = i + 1;
-                    Log.d("value_axis_humi","" +Integer.parseInt(data.getHumidity()));
+                    try{
+                        String clock= data.getClock_at();
+                        String hour=data.getCreated_at()+' '+clock.split(":")[0] +':'+clock.split(":")[1];
+                        valuesTemp.add(new Entry(i, Integer.parseInt(data.getTemperature())));
+                        valuesHumi.add(new Entry(i, Integer.parseInt(data.getHumidity())));
+                        valuesLight.add(new Entry(i, Integer.parseInt(data.getLight())));
+                        valuesHumiTanah.add(new Entry(i,Integer.parseInt(data.getHumidityTanah())));
+                        valuesClocks.add(hour);
+                        i = i + 1;
+                        Log.d("value_axis_humi","" +Integer.parseInt(data.getHumidity()));
+                    }
+                    catch (NullPointerException e){
+
+                    }
+
                 }
                 Log.d("value-axis","max="+i);
             }
@@ -446,20 +460,26 @@ public class GrafikActivity extends AppCompatActivity {
         for (ListPlant list : listPlant) {
             if (list.getName().equals(globalClass.getModeNamePlant())) {
                 for (DataPlant data : list.getPlants()) {
-                    DateHelper dateHelper = new DateHelper();
-                    String tgl = dateHelper.getDDMMYYYformat(data.getCreated_at());
-                    Log.d("gettgl", tgl);
-                    if (dateHelper.isBiggerDate(tgl, tglawal) == 1 && dateHelper.isLowerDate(tgl, tglakhir) == 1) {
-                        Log.d("gettgl_banding_masuk", tgl + ";" + tglawal + ";" + tglakhir);
+                    try{
+                        DateHelper dateHelper = new DateHelper();
+                        String tgl = dateHelper.getDDMMYYYformat(data.getCreated_at());
+                        Log.d("gettgl", tgl);
+                        if (dateHelper.isBiggerDate(tgl, tglawal) == 1 && dateHelper.isLowerDate(tgl, tglakhir) == 1) {
+                            Log.d("gettgl_banding_masuk", tgl + ";" + tglawal + ";" + tglakhir);
 
-                        valuesTemp.add(new Entry(i, Integer.parseInt(data.getTemperature())));
-                        valuesHumi.add(new Entry(i, Integer.parseInt(data.getHumidity())));
-                        valuesLight.add(new Entry(i, Integer.parseInt(data.getLight())));
-                        valuesHumiTanah.add(new Entry(i,Integer.parseInt(data.getHumidityTanah())));
+                            valuesTemp.add(new Entry(i, Integer.parseInt(data.getTemperature())));
+                            valuesHumi.add(new Entry(i, Integer.parseInt(data.getHumidity())));
+                            valuesLight.add(new Entry(i, Integer.parseInt(data.getLight())));
+                            valuesHumiTanah.add(new Entry(i,Integer.parseInt(data.getHumidityTanah())));
 
-                        i = i + 1;
+                            i = i + 1;
+
+                        }
+                    }
+                    catch(NullPointerException e){
 
                     }
+
 
                 }
             }

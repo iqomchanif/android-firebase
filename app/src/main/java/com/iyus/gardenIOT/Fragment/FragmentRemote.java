@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -51,7 +52,7 @@ public class FragmentRemote extends Fragment {
         btnMode.setTextOff("Otomatis");
         // Spinner click listener
         // Spinner Drop down elements
-        List<String> categories = new ArrayList<String>();
+        final List<String> categories = new ArrayList<String>();
         for(ListPlant list:globalClass.getListPlants()){
             categories.add(list.getName());
 
@@ -65,12 +66,29 @@ public class FragmentRemote extends Fragment {
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         spinJenisTanaman.setAdapter(dataAdapter);
+
+
+        spinJenisTanaman.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view,
+                                       int position, long id) {
+                updateData(globalClass.getSettings());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                // TODO Auto-generated method stub
+
+            }
+        });
         btnSemprot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d("spiin",spinJenisTanaman.getSelectedItem().toString());
 
                 if(btnSemprot.isChecked()){
+
                     mainActivity.setUpdateData(spinJenisTanaman.getSelectedItem().toString(),"semprot","1");
                 }
                 else{
@@ -83,10 +101,17 @@ public class FragmentRemote extends Fragment {
             @Override
             public void onClick(View v) {
                 if(btnLampu.isChecked()){
-                    mainActivity.setUpdateData(spinJenisTanaman.getSelectedItem().toString(),"led","1");
+                    for(String namatanaman : categories ){
+                        mainActivity.setUpdateData(namatanaman,"led","1");
+                    }
+//                    mainActivity.setUpdateData(spinJenisTanaman.getSelectedItem().toString(),"led","1");
                 }
                 else{
-                    mainActivity.setUpdateData(spinJenisTanaman.getSelectedItem().toString(),"led","0");
+                    for(String namatanaman : categories ){
+                        mainActivity.setUpdateData(namatanaman,"led","0");
+
+                    }
+//                    mainActivity.setUpdateData(spinJenisTanaman.getSelectedItem().toString(),"led","0");
 
                 }
             }
@@ -95,10 +120,18 @@ public class FragmentRemote extends Fragment {
             @Override
             public void onClick(View v) {
                 if(btnKipas.isChecked()){
-                    mainActivity.setUpdateData(spinJenisTanaman.getSelectedItem().toString(),"kipas","1");
+                    for(String namatanaman : categories ){
+                        mainActivity.setUpdateData(namatanaman,"kipas","1");
+
+                    }
+//                    mainActivity.setUpdateData(spinJenisTanaman.getSelectedItem().toString(),"kipas","1");
                 }
                 else{
-                    mainActivity.setUpdateData(spinJenisTanaman.getSelectedItem().toString(),"kipas","0");
+                    for(String namatanaman : categories ){
+                        mainActivity.setUpdateData(namatanaman,"kipas","0");
+
+                    }
+//                    mainActivity.setUpdateData(spinJenisTanaman.getSelectedItem().toString(),"kipas","0");
 
                 }
             }
@@ -188,6 +221,10 @@ public class FragmentRemote extends Fragment {
         txt_kelembapanTanah = dialogView.findViewById(R.id.txt_kelembapanTanah);
         dialog.setTitle("Update Data Setting");
 
+        txt_kelembapanTanah.setText(tvSettingKelembapanTanah.getText().toString().split(":")[1]);
+        txt_kelembapan.setText(tvSettingKelembapan.getText().toString().split(":")[1]);
+        txt_suhu.setText(tvSettingSuhu.getText().toString().split(":")[1]);
+        txt_cahaya.setText(tvSettingCahaya.getText().toString().split(":")[1]);
         dialog.setPositiveButton("oke", new DialogInterface.OnClickListener() {
 
             @Override

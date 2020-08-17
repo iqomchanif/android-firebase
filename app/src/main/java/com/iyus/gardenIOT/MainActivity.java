@@ -128,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
                     int i = 0;
                     for (DataSnapshot plantDetail : plantSnapshot.getChildren()) {
 
-                        try {
+//                        try {
                             DataPlant plant = plantDetail.getValue(DataPlant.class);
                             //                        Log.d("firebase_plants_value","humi:"+ plant.getHumidity());
                             //                        Log.d("firebase_plants_value","temp:"+ plant.getTemperature());
@@ -144,11 +144,11 @@ public class MainActivity extends AppCompatActivity {
                             i = i + 1;
                             arrayPlant.add(itemPlant);
 
-                        } catch (Exception e) {
-                            error += 1;
-                            Log.d("datasnapshot","error"+error);
-                            Log.d("snapplantdetail", plantDetail.toString());
-                        }
+//                        } catch (Exception e) {
+//                            error += 1;
+//                            Log.d("datasnapshot","error"+error);
+//                            Log.d("snapplantdetail", plantDetail.toString());
+//                        }
                     }
 //                    Toast.makeText(MainActivity.this, "get " + error + " data error", Toast.LENGTH_SHORT).show();
                     iPlant++;
